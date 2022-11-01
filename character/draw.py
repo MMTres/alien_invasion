@@ -1,6 +1,6 @@
 
 import pygame
-from ship import Ship
+from character.ship import Ship
 import sys
 
 

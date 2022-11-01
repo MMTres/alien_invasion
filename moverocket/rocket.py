@@ -9,7 +9,7 @@ class Rocket:
         self.screen_rect = ai_game.screen.get_rect()
 
         # load the ship image and get its rect
-        self.image = pygame.image.load('alien.bmp')
+        self.image = pygame.image.load('../character/alien.bmp')
         self.rect = self.image.get_rect()
 
         # start each new ship at the center of the screen
