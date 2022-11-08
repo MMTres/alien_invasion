@@ -1,7 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 
-class Star(Sprite):
+class Rain(Sprite):
     """A class to represent a single alien in the fleet"""
     def __init__(self, sg):
         """initialize the game and set its starting position"""
@@ -11,7 +11,7 @@ class Star(Sprite):
 
         #load the star image and set its rect attribute
 
-        self.image = pygame.image.load('goldstar.bmp')
+        self.image = pygame.image.load('raindrop.bmp')
         self.image = pygame.transform.scale(self.image, (50,50))
         self.rect = self.image.get_rect()
 
@@ -21,6 +21,8 @@ class Star(Sprite):
 
         # store the alien's exact horizontal position
         self.x = float(self.rect.x)
+
+
 
 
 
