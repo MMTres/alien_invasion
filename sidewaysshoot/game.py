@@ -95,6 +95,9 @@ class SidewaysShoot:
         #check for any bullets that have hit aliens
         #if so get rid of the bullet and the alien
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        if collisions:
+            self.stats.hit += 1
+            print(self.stats.hit)
         if not self.aliens:
             #destroy existing bullets and create new fleet
 
@@ -120,7 +123,7 @@ class SidewaysShoot:
         print(alien_width, alien_height)
         ship_height = self.ship.rect.height
         available_space_x = self.settings.screen_width - (2*alien_width) - ship_height
-        available_space_y = self.settings.screen_height - 3*alien_height
+        available_space_y = self.settings.screen_height - 2*alien_height
         number_aliens_x = available_space_x // (2* alien_width)
         number_rows = available_space_y // (2*alien_height)
 
@@ -135,13 +138,13 @@ class SidewaysShoot:
         alien_width, alien_height = alien.rect.size
         alien.x = self.settings.screen_width - (alien_width + 2 * alien_width * alien_number)
         alien.rect.x = alien.x
-        alien.rect.y = alien_height +2 * alien.rect.height * row_number
+        alien.rect.y = alien_height * 2*row_number
         self.aliens.add(alien)
 
     def _ship_hit(self):
         """respond to the ship being hit by an alien"""
         #decrement ships left
-
+        print("no")
         if self.stats.ships_left > 0:
             self.stats.ships_left -=1
             #get rid of any remaining bullets and aliens
@@ -181,9 +184,8 @@ class SidewaysShoot:
 
     def _check_aliens_left(self):
         """check if any aliens have reached the left of the screen"""
-        screen_rect = self.screen.get_rect()
         for alien in self.aliens.sprites():
-            if alien.rect.left >= screen_rect.left:
+            if alien.rect.left > self.settings.screen_width:
                 self._ship_hit()
                 break
 
