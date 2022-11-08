@@ -13,7 +13,7 @@ class StarGrid:
         self.settings = Settings()
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Star Grid")
-        self.star = pygame.sprite.Group()
+        self.stars = pygame.sprite.Group()
         self._create_grid()
 
     def _create_grid(self):
@@ -23,8 +23,7 @@ class StarGrid:
         star = Star(self)
         star_width, star_height = star.rect.size
         print(star_width, star_height)
-        #star_width = star_width * 0.1
-        #star_height = star_height * 0.1
+
         print(star_width, star_height)
         available_space_x = self.settings.screen_width - (2 * star_width)
         number_stars_x = available_space_x // (2 * star_width)
@@ -43,11 +42,11 @@ class StarGrid:
         star = Star(self)
         star_width, star_height = star.rect.size
         from random import randint
-        random_number1 = randint(-15, 15)
-        star.x = star_width + 2 * star_width * star_number + random_number1
+        #random_number1 = randint(-15, 15)
+        star.x = star_width + 2 * star_width * star_number
         star.rect.x = star.x
-        random_number2 = randint(-15, 15)
-        star.rect.y = star_height + 2 * star.rect.height * row_number + random_number2
+        #random_number2 = randint(-15, 15)
+        star.rect.y = star_height + 2 * star.rect.height * row_number
         self.stars.add(star)
 
     def _update_screen(self):

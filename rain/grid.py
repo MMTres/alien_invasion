@@ -15,6 +15,8 @@ class RainGrid:
         pygame.display.set_caption("Rain Grid")
         self.drops = pygame.sprite.Group()
         self._create_grid()
+        self.number_rows=0
+        self.number_drops_x =0
 
     def _create_grid(self):
         """Create the fleet of aliens"""
@@ -23,15 +25,15 @@ class RainGrid:
         rain = Rain(self)
         rain_width, rain_height = rain.rect.size
         available_space_x = self.settings.screen_width - (2 * rain_width)
-        number_drops_x = available_space_x // (2 * rain_width)
+        self.number_drops_x = available_space_x // (2 * rain_width)
 
         # Determine the number of rows of stars that fits on the screen
-        available_space_y = (self.settings.screen_height - (rain_height))
-        number_rows = available_space_y // (2 * rain_height)
+        available_space_y = (self.settings.screen_height)
+        self.number_rows = available_space_y // (rain_height)
 
         # create the full fleet of stars
-        for row_number in range(number_rows):
-            for rain_number in range(number_drops_x):
+        for row_number in range(self.number_rows):
+            for rain_number in range(self.number_drops_x):
                 self._create_rain(rain_number, row_number)
 
     def _create_rain(self, rain_number, row_number):
@@ -62,30 +64,23 @@ class RainGrid:
 
     def _rain_fall(self):
         """drop the entire fleet and change the fleet's direction"""
-        num_dead = 0
+        dropped = 0
         for drop in self.drops.sprites():
             drop.rect.y += self.settings.fleet_drop_speed
             if drop.rect.bottom > self.settings.screen_height:
-                num_dead += 1
-
-        if num_dead == 11:
-            self.drops.remove(drop)
-            break
-        self._create_grid()
+                dropped += 1
+                self.drops.remove(drop)
+        #if dropped != 0:
             #self._new_row()
 
 
     def _new_row(self):
         rain = Rain(self)
         rain_width, rain_height = rain.rect.size
-        print(rain_width, rain_height)
         available_space_x = self.settings.screen_width - (2 * rain_width)
-        number_drops_x = available_space_x // (2 * rain_width)
-        available_space_y = (self.settings.screen_height - (rain_height))
-        number_rows = available_space_y // (2 * rain_height)
-        print(number_rows)
-        for rain_number in range(number_drops_x):
-            self._create_rain(rain_number, 5)
+        self.number_drops_x = available_space_x // (2 * rain_width)
+        for x in range(self.number_drops_x):
+            self._create_rain(x, -1)
 
 
 if __name__ == '__main__':

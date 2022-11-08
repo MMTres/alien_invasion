@@ -2,7 +2,7 @@ import pygame
 from pygame.sprite import Sprite
 
 class Star(Sprite):
-    """A class to represent a single alien in the fleet"""
+    """A class to represent a single star """
     def __init__(self, sg):
         """initialize the game and set its starting position"""
         super().__init__()
@@ -19,7 +19,7 @@ class Star(Sprite):
         self.rect.x = self.rect.width
         self.rect.y = self.rect.height
 
-        # store the alien's exact horizontal position
+        # store the stars's exact horizontal position
         self.x = float(self.rect.x)
 
 
