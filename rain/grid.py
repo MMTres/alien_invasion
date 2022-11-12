@@ -70,8 +70,8 @@ class RainGrid:
             if drop.rect.bottom > self.settings.screen_height:
                 dropped += 1
                 self.drops.remove(drop)
-        #if dropped != 0:
-            #self._new_row()
+        if dropped != 0:
+            self._new_row()
 
 
     def _new_row(self):
